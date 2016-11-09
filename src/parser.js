@@ -21,11 +21,6 @@ function codeBlockTemplate(exampleRun, exampleSrc, langClass) {
   return `
 <div class="example">
   <div class="run">${exampleRun}</div>
-  <div class="source">
-    <pre><code${!langClass ? '' : ` class="${langClass}"`}>
-      ${exampleSrc}
-    </code></pre>
-  </div>
 </div>`;
 }
 
