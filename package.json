@@ -1,6 +1,6 @@
 {
-  "name": "react-markdown-loader",
-  "version": "1.1.6",
+  "name": "@reem/react-markdown-loader",
+  "version": "1.0.0",
   "description": "Webpack loader to render React Components from markdown",
   "keywords": [
     "react",
@@ -9,16 +9,17 @@
     "loader",
     "markdown"
   ],
-  "homepage": "https://github.com/javiercf/react-markdown-loader",
-  "bugs": "https://github.com/javiercf/react-markdown-loader/issues",
+  "homepage": "https://github.com/terminalcloud/react-markdown-loader",
+  "bugs": "https://github.com/terminalcloud/react-markdown-loader/issues",
   "license": "MIT",
   "author": "Javier Cubides <javiercferrans@gmail.com>",
   "contributors": [
-    "Fernando Pasik <fernando@pasik.com.ar> (http://fernandopasik.com/)"
+      "Fernando Pasik <fernando@pasik.com.ar> (http://fernandopasik.com/)",
+      "Jonathan Reem <jonathan.reem@gmail.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/javiercf/react-markdown-loader.git"
+    "url": "https://github.com/terminalcloud/react-markdown-loader.git"
   },
   "main": "src/index.js",
   "scripts": {
