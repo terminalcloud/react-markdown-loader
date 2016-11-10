@@ -30,11 +30,15 @@ module.exports = function build(markdown) {
   return `
 ${doImports}
 
-module.exports = function() {
-  return (
-    <div>
-      ${jsx}
-    </div>
-  );
-};`;
+class MarkdownComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        ${jsx}
+      </div>
+    );
+  }
+};
+
+module.exports = MarkdownComponent;`;
 };
