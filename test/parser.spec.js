@@ -35,12 +35,20 @@ describe('Parse Markdown', () => {
       .deep.equal({ Button: './button.js', HelloWorld: './hello-world.js' });
   });
 
-  it('example code blocks have run and source code', () => {
+  it('render jsx code blocks have the jsx embedded', () => {
     const
       exampleCode = 'example',
       result = parser.jsxBlock(exampleCode);
 
     result.should.equal(`<div class="run">example</div>`);
+  });
+
+  it('render html blocks have html embedded in dangerouslySetInnerHTML', () => {
+    const
+      exampleCode = '<div class="whatever">Hello!</div>',
+      result = parser.htmlBlock(exampleCode);
+
+    result.should.equal(`<div class="run" dangerouslySetInnerHTML={{ __html: \`${exampleCode}\` }}/>`);
   });
 
   it('parses markdown with live code blocks', () =>
