@@ -17,11 +17,20 @@ require('prismjs/components/prism-jsx');
  * @param   {string} langClass  CSS class for the code block
  * @returns {string}            Code block with souce and run code
  */
-function codeBlockTemplate(exampleRun, exampleSrc, langClass) {
-  return `
-<div class="example">
-  <div class="run">${exampleRun}</div>
-</div>`;
+function jsxBlock(exampleRun) {
+  return `<div class="run">${exampleRun}</div>`
+}
+
+/**
+ * Wraps the code and jsx in an html component
+ * for styling it later
+ * @param   {string} exampleRun Code to be run in the styleguide
+ * @param   {string} exampleSrc Source that will be shown as example
+ * @param   {string} langClass  CSS class for the code block
+ * @returns {string}            Code block with souce and run code
+ */
+function htmlBlock(exampleRun) {
+  return `<div class="run" dangerouslySetInnerHtml=${exampleRun}/>`
 }
 
 /**
@@ -33,24 +42,15 @@ function codeBlockTemplate(exampleRun, exampleSrc, langClass) {
  * @returns {String}                Code block with souce and run code
  */
 function parseCodeBlock(code, lang, langPrefix, highlight) {
-  let codeBlock = escapeHtml(code);
+  console.log('parseCodeBlock', JSON.stringify({ code, lang, langPrefix, highlight }, null, 2));
 
-  if (highlight) {
-    codeBlock = highlight(code, lang);
+  if (lang === 'jsx') {
+    return jsxBlock(code);
+  } else if (lang === 'html') {
+    return htmlBlock(code);
+  } else {
+    throw new Error(`Unknown render language: ${lang}`);
   }
-
-  const
-    langClass = !lang ? '' : `${langPrefix}${escape(lang, true)}`,
-    jsx = code;
-
-  codeBlock = codeBlock
-    .replace(/{/g, '{"{"{')
-    .replace(/}/g, '{"}"}')
-    .replace(/{"{"{/g, '{"{"}')
-    .replace(/(\n)/g, '{"\\n"}')
-    .replace(/class=/g, 'className=');
-
-  return codeBlockTemplate(jsx, codeBlock, langClass);
 }
 
 /**
@@ -86,7 +86,7 @@ function parseMarkdown(markdown) {
     md.set(options);
 
     md.renderer.rules.fence_custom.render = (tokens, idx, options) => {
-      // gets tags applied to fence blocks ```react html
+      // gets tags applied to fence blocks ```render html
       const codeTags = tokens[idx].params.split(/\s+/g);
       return parseCodeBlock(
         tokens[idx].content,
@@ -128,7 +128,8 @@ function parse(markdown) {
 }
 
 module.exports = {
-  codeBlockTemplate,
+  jsxBlock,
+  htmlBlock,
   parse,
   parseCodeBlock,
   parseFrontMatter,

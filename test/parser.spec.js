@@ -38,17 +38,9 @@ describe('Parse Markdown', () => {
   it('example code blocks have run and source code', () => {
     const
       exampleCode = 'example',
-      result = parser.codeBlockTemplate(exampleCode, exampleCode);
+      result = parser.jsxBlock(exampleCode);
 
-    result.should.equal(`
-<div class="example">
-  <div class="run">example</div>
-  <div class="source">
-    <pre><code>
-      example
-    </code></pre>
-  </div>
-</div>`);
+    result.should.equal(`<div class="run">example</div>`);
   });
 
   it('parses markdown with live code blocks', () =>
@@ -63,7 +55,7 @@ describe('Parse Markdown', () => {
     const
       exampleCode = '![](myImage.png)';
     parser.parse(exampleCode).then(result => {
-      result.html.should.ewual('<p><img src="myImage.png" alt="" /></p>\n');
+      result.html.should.equal('<p><img src="myImage.png" alt="" /></p>\n');
     });
   });
 

@@ -7,14 +7,14 @@ imports:
 
 This is an example component
 
-```render html
+```render jsx
 <HelloWorld />
 <Button label="Hello World" />
 ```
 
 You can set who to say Hello
 
-```render html
+```render jsx
 <HelloWorld who="Fernando" />
 <Button label="Hello Fernando" />
 ```
