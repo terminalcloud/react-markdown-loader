@@ -30,7 +30,7 @@ function jsxBlock(exampleRun) {
  * @returns {string}            Code block with souce and run code
  */
 function htmlBlock(exampleRun) {
-  return `<div class="run" dangerouslySetInnerHtml=${exampleRun}/>`
+  return `<div class="run" dangerouslySetInnerHTML={{ __html: \`${exampleRun}\` }}/>`
 }
 
 /**
@@ -42,8 +42,6 @@ function htmlBlock(exampleRun) {
  * @returns {String}                Code block with souce and run code
  */
 function parseCodeBlock(code, lang, langPrefix, highlight) {
-  console.log('parseCodeBlock', JSON.stringify({ code, lang, langPrefix, highlight }, null, 2));
-
   if (lang === 'jsx') {
     return jsxBlock(code);
   } else if (lang === 'html') {
